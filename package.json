@@ -1,0 +1,25 @@
+{
+  "name": "fsl",
+  "version": "0.1.0",
+  "description": "Finite State Language specification and definition",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StoneCypher/fsl.git"
+  },
+  "keywords": [
+    "Finite",
+    "State",
+    "Language",
+    "fsm"
+  ],
+  "author": "John Haugeland <stonecypher@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StoneCypher/fsl/issues"
+  },
+  "homepage": "https://github.com/StoneCypher/fsl#readme"
+}
