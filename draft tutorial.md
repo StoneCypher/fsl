@@ -31,6 +31,15 @@ Yellow -> Red;
 Red -> Green;
 ```
 
+Fundamentally, this tells the `machine` that there exist three `state`s, called **Green**, **Yellow**, and **Red**,
+and that each one is only allowed to go to one other - that is, if an instance of a `machine` is in **Green**, it
+may only `transition` to **Yellow**, never to **Red**, never back to **Green**, and never to some other unmentioned
+state such as **Blue** or **Tuesday**.
+
+`Finite state machine`s are about telling your `machine` what it is and what it is not allowed to do, to prevent it
+from getting into nonsensical states (like a payment that is both `paid` and `unpaid`, something my phone company
+has already done to me twice.)
+
 
 
 <br/><br/>
