@@ -17,6 +17,7 @@ the entire language is optional.
 a state machine seems to be the traffic light, which has four `state`s: the three basic colors **Red**, **Yellow**, and
 **Green**, and a `state` to represent when the machine is physically powered down, which we'll call **Off**.
 
+<br/><br/>
 ### States and Transitions: a->b;
 In `FSL`, the most obvious way to write a traffic light is as its three colors, which are this `machine`'s `state`s,
 and the changes they can undergo (eg from **Green** to **Yellow**,) which are this `machine`'s `transition`s, in 
@@ -28,6 +29,7 @@ Yellow -> Red;
 Red -> Green;
 ```
 
+<br/><br/>
 ### Chains: a->b->c;
 You can save time, and add some clarity, by writing those as a chain:
 
@@ -35,6 +37,7 @@ You can save time, and add some clarity, by writing those as a chain:
 Green -> Yellow -> Red -> Green;
 ```
 
+<br/><br/>
 ### Mixed transitions and chains: a->b->c; d->e;
 You'd also want to do the stuff to **Off**:
 
@@ -48,6 +51,7 @@ Yellow -> Off;
 Red -> Off;
 ```
 
+<br/><br/>
 ### Node lists: [a b c]
 You could drop the redundancy to **Off** with a `list`:
 
@@ -58,6 +62,7 @@ Off -> Red;
 [Green Yellow Red] -> Off;
 ```
 
+<br/><br/>
 ### Main Path: =>
 Then it might be smart to mark the color cycle as a `main path` using the `=>` operator.  
 
@@ -72,6 +77,7 @@ Off -> Red;
 [Green Yellow Red] -> Off;
 ```
 
+<br/><br/>
 ### Actions: 'name'
 Then we can add `'action names'`, such as `'Proceed'`, `'Enable'`, and `'Disable'`:
 
@@ -85,6 +91,7 @@ Off 'Enable' -> Red;
 This means that we can tell the light to **proceed**, instead of telling it to switch to **Yellow** specifically,
 letting it handle events with internal intent, simplifying working with `machine`s.
 
+<br/><br/>
 ### Forced-only paths: ~>
 Next we mark the paths to **Off** as `forced-only` with `~>`:
 
@@ -95,6 +102,7 @@ Off 'Enable' -> Red;
 [Green Yellow Red] 'Disable' ~> Off;
 ```
 
+<br/><br/>
 ### Named ordered sequences: &Foo
 
 If we wanted, we could also declare the **Colors** as a `named ordered sequence`:
@@ -108,6 +116,7 @@ Off 'Enable' -> Red;
 [Green Yellow Red] 'Disable' ~> Off;
 ```
 
+<br/><br/>
 ### Using named sequences in transitions: &Foo -> bar;
 
 `Named ordered sequences` come out as a multiplexing in arrows, like usual:
@@ -121,9 +130,48 @@ Off 'Enable' -> Red;
 &Colors 'Disable' ~> Off;
 ```
 
-### Using named sequences to make cycles: &Foo -> (+1);
+<br/><br/>
+### Using named ordered sequences to make cycles: &Foo -> (+1);
 
-Named sequences can also be used with the `cycle` operator `(N)` to simplify how we describe loops:
+`Named ordered sequence`s can also be used with the `cycle` operator `(N)` to simplify how we describe loops.
+
+Right now we describe the main loop as 
+
+```fsl
+Green 'Proceed' => Yellow 'Proceed' => Red 'Proceed' => Green;
+```
+
+We also name the colors
+
+```fsl
+&Colors: [Green Yellow Red];
+```
+
+In every case, that's `First 'Proceed' => Second`.  First and second, if you wrap around the end
+of the list, match the things in the `named ordered sequence` every time.
+
+As such, you can change
+
+```fsl
+&Colors: [Green Yellow Red];
+Green 'Proceed' => Yellow 'Proceed' => Red 'Proceed' => Green;
+```
+
+to
+
+```fsl
+&Colors: [Green Yellow Red];
+&Colors 'Proceed' => (+1);
+```
+
+The operator `(+1)` is called the `cycle operator`, and that says "apply this transition to each `state` in the 
+`named ordered set` in order, and make the other end `+1` steps up the list.
+
+When applied to **Green** the `cycle` gets **Yellow** as the other end, because **Yellow** is `+1` steps up the 
+`named ordered sequence`.  When applied to **Yellow** it gets **Red**, and when applied to **Red** it gets **Green**
+again.
+
+This means that we can now write the machine this way:
 
 ```fsl
 &Colors: [Green Yellow Red];
