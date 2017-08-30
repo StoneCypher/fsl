@@ -36,6 +36,10 @@ and that each one is only allowed to go to one other - that is, if an instance o
 may only `transition` to **Yellow**, never to **Red**, never back to **Green**, and never to some other unmentioned
 state such as **Blue** or **Tuesday**.
 
+This also says that once the `machine` has `transition`ed to **Yellow**, the rules have changed: now it is only 
+allowed to go to **Red**, never to anywhere else.  (This models the American traffic light.  Other countries may
+have different rules.  Sorry for any confusion.)
+
 `Finite state machine`s are about telling your `machine` what it is and what it is not allowed to do, to prevent it
 from getting into nonsensical states (like a payment that is both `paid` and `unpaid`, something my phone company
 has already done to me twice.)
