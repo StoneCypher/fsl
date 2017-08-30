@@ -1,4 +1,4 @@
-# `FSL` Language Specification 0.1.0
+# `FSL` Language Tutorial 0.1.0
 
 `FSL`, or "Finite State Language," is a notation for writing finite state machines concisely and clearly.
 
