@@ -1,0 +1,16 @@
+machine_name      : "Tutorial four-state traffic light";
+machine_version   : 1.0.0;
+machine_origin    : "https://github.com/StoneCypher/fsl/blob/master/tutorial%20machines/four%20state%20traffic%20light.fsl";
+machine_reference : "https://github.com/StoneCypher/fsl/blob/master/draft%20tutorial.md";
+
+machine_author    : "John Haugeland <stonecypher@gmail.com>";
+machine_license   : MIT;
+
+
+
+&Colors: [Green Yellow Red];
+
+&Colors 'Proceed' => (+1);
+&Colors 'Disable' ~> Off;
+
+Off 'Enable' -> Red;
