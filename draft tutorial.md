@@ -233,6 +233,8 @@ Off 'Enable' -> Red;
 <br/><br/>
 ### Making machines manageable: annotations
 
+That was a little heavy.  Let's finish this machine off then have some fun doing other things.
+
 Let's add some annotations, to make this more tractable as a piece of source: `machine_name`, `machine_version`, 
 `machine_reference`, `machine_origin`, `machine_author`, and `machine_license`.
 
@@ -254,6 +256,43 @@ machine_license   : MIT;
 Off 'Enable' -> Red;
 ```
 
+### Quoted strings: "No problem"
+
+Let's have a little fun remaking a classic joke flowchart as a `FSL` machine.
+
+Sometimes the states we want to use have spaces in them, or other letters that won't fit our normal short 
+expression (which is called an `atom`, by the by.)  If we need spaces, exclamation points, and so on, we
+should switch to `quoted string`s.
+
+![](https://raw.githubusercontent.com/StoneCypher/fsl/master/assets/no%20problem%20flowchart.jpg)
+
+Here's the **No Problem** flowchart represented as an `FSL machine`.
+
+```fsl
+"Does the damn thing work?" 'Yes' -> "Don't mess with it!" -> "No Problem";
+"Does the damn thing work?" 'No'  -> "Did you mess with it?";
+
+"Did you mess with it?" 'No'  -> "Will you catch hell?"; 
+"Did you mess with it?" 'Yes' -> "You idiot!";
+
+"You idiot!" -> "Does anyone know?" 'Yes' -> "You poor idiot";
+                "Does anyone know?" 'No'  -> "Hide it!" -> "No Problem";
+
+"Will you catch hell?" 'No'  -> "Trash it" -> "No Problem";
+"Will you catch hell?" 'Yes' -> "You poor idiot";
+
+"You poor idiot" -> "Can you blame someone else?" 'Yes' -> "No Problem";
+                    "Can you blame someone else?" 'No'  -> "You poor idiot";
+```
+
+Which renders in [jssm-viz](https://github.com/StoneCypher/jssm-viz/) or the 
+[graph explorer](https://stonecypher.github.io/jssm-viz-demo/graph_explorer.html) as
+
+![](https://raw.githubusercontent.com/StoneCypher/fsl/master/assets/no%20problem%20flowchart%20fsm.png)
+
+
+
+<br/><br/>
 ### Probabilistics: a 50% -> b
 
 Enough traffic lights for now.  You can write a coin flip like this:
