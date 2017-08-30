@@ -17,6 +17,8 @@ the entire language is optional.
 a state machine seems to be the traffic light, which has four `state`s: the three basic colors **Red**, **Yellow**, and
 **Green**, and a `state` to represent when the machine is physically powered down, which we'll call **Off**.
 
+
+
 <br/><br/>
 ### States and Transitions: a->b;
 In `FSL`, the most obvious way to write a traffic light is as its three colors, which are this `machine`'s `state`s,
@@ -29,6 +31,8 @@ Yellow -> Red;
 Red -> Green;
 ```
 
+
+
 <br/><br/>
 ### Chains: a->b->c;
 You can save time, and add some clarity, by writing those as a chain:
@@ -36,6 +40,8 @@ You can save time, and add some clarity, by writing those as a chain:
 ```fsl
 Green -> Yellow -> Red -> Green;
 ```
+
+
 
 <br/><br/>
 ### Mixed transitions and chains: a->b->c; d->e;
@@ -51,6 +57,8 @@ Yellow -> Off;
 Red -> Off;
 ```
 
+
+
 <br/><br/>
 ### Node lists: [a b c]
 You could drop the redundancy to **Off** with a `list`:
@@ -61,6 +69,8 @@ Green -> Yellow -> Red -> Green;
 Off -> Red;
 [Green Yellow Red] -> Off;
 ```
+
+
 
 <br/><br/>
 ### Main Path: =>
@@ -77,6 +87,8 @@ Off -> Red;
 [Green Yellow Red] -> Off;
 ```
 
+
+
 <br/><br/>
 ### Actions: 'name'
 Then we can add `'action names'`, such as `'Proceed'`, `'Enable'`, and `'Disable'`:
@@ -91,6 +103,8 @@ Off 'Enable' -> Red;
 This means that we can tell the light to **proceed**, instead of telling it to switch to **Yellow** specifically,
 letting it handle events with internal intent, simplifying working with `machine`s.
 
+
+
 <br/><br/>
 ### Forced-only paths: ~>
 Next we mark the paths to **Off** as `forced-only` with `~>`:
@@ -101,6 +115,8 @@ Green 'Proceed' => Yellow 'Proceed' => Red 'Proceed' => Green;
 Off 'Enable' -> Red;
 [Green Yellow Red] 'Disable' ~> Off;
 ```
+
+
 
 <br/><br/>
 ### Named ordered sequences: &Foo
@@ -116,6 +132,8 @@ Off 'Enable' -> Red;
 [Green Yellow Red] 'Disable' ~> Off;
 ```
 
+
+
 <br/><br/>
 ### Using named sequences in transitions: &Foo -> bar;
 
@@ -129,6 +147,8 @@ Green 'Proceed' => Yellow 'Proceed' => Red 'Proceed' => Green;
 Off 'Enable' -> Red;
 &Colors 'Disable' ~> Off;
 ```
+
+
 
 <br/><br/>
 ### Using named ordered sequences to make cycles: &Foo -> (+1);
@@ -193,6 +213,9 @@ Which is suddenly more readable when written in this order:
 Off 'Enable' -> Red;
 ```
 
+
+
+<br/><br/>
 ### Making machines manageable: annotations
 
 Let's add some annotations, to make this more tractable as a piece of source: `machine_name`, `machine_version`, 
@@ -259,6 +282,27 @@ Which are sometimes clearer on multiple lines:
 'Cool' Plasma;
 ```
 
+
+
+<br/><br/>
+### Stripes: (|+1|);
+
+If you prefer, you could write that with the `stripe` syntax `(|N|)`, which is a `cycle` that doesn't loop at the ends.
+
+```fsl
+&States: [Solid Liquid Gas Plasma];
+
+States 'Heat' => (|+1|);
+States 'Cool' => (|-1|);
+```
+
+And if you're feeling froggy, you can write that
+
+```fsl
+&States: [Solid Liquid Gas Plasma];
+
+(|-1|) <= 'Cool' States 'Heat' => (|+1|);
+```
 
 <br/><br/>
 ### Yes, there are reverse arrows: <-
