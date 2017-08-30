@@ -165,7 +165,7 @@ to
 ```
 
 The operator `(+1)` is called the `cycle operator`, and that says "apply this transition to each `state` in the 
-`named ordered set` in order, and make the other end `+1` steps up the list.
+`named ordered set` in order, and make the other end `+1` steps up the list."
 
 When applied to **Green** the `cycle` gets **Yellow** as the other end, because **Yellow** is `+1` steps up the 
 `named ordered sequence`.  When applied to **Yellow** it gets **Red**, and when applied to **Red** it gets **Green**
@@ -215,3 +215,97 @@ machine_license   : MIT;
 
 Off 'Enable' -> Red;
 ```
+
+### Probabilistics: a 50% -> b
+
+Enough traffic lights for now.  You can write a coin flip like this:
+
+```fsl
+UnflippedCoin 'Flip' 50% -> Heads;
+UnflippedCoin 'Flip' 50% -> Tails;
+```
+
+You could of course also write that
+
+```fsl
+UnflippedCoin 'Flip' 50% -> [Heads Tails];
+```
+
+
+
+<br/><br/>
+### Two-way arrows: <->
+
+Enough traffic lights for now.  
+
+You can also write multiple directions at once.  Here's the basic four states of matter:
+
+```fsl
+Solid <-> Liquid <-> Gas <-> Plasma;
+```
+
+Which can be written with actions:
+
+```fsl
+Solid 'Heat' <-> 'Cool' Liquid 'Heat' <-> 'Cool' Gas 'Heat' <-> 'Cool' Plasma;
+```
+
+Which are sometimes clearer on multiple lines:
+
+```fsl
+       Solid  'Heat' <-> 
+'Cool' Liquid 'Heat' <-> 
+'Cool' Gas    'Heat' <-> 
+'Cool' Plasma;
+```
+
+
+<br/><br/>
+### Yes, there are reverse arrows: <-
+
+Mostly because it'd be weird if there weren't.  This is legal:
+
+```fsl
+state1 -> state2 <- state3;
+```
+
+
+
+<br/><br/>
+### Arrow types and multiple direction arrows: <~=>
+
+You can write a `transition` that's `main`, `legal`, or `forced-only` in one direction, and different in the other.
+
+For example, to write a `transition` where it's normal to turn something on, but a `forced` action to turn it off, write:
+
+```fsl
+Off <~-> Running;
+```
+
+There are, as such, fifteen total arrows:
+
+```
+-> <-> <-  <-=> <-~>
+=> <=> <=  <=-> <=~>
+~> <~> <~  <~-> <~=>
+```
+
+
+<br/><br/>
+### Edge attributes: a {b: c;} -> d
+
+There turn out to be lots of edge attributes, despite only a few on shorthand notations.
+
+This:
+
+```fsl
+UnflippedCoin 'Flip' 50% -> Heads;
+```
+
+is the same thing as
+
+```fsl
+UnflippedCoin { action: "Flip"; probability: 50; } -> Heads;
+```
+
+Most of the edge attributes are not actually available as shorthands, because it's not time to invent another APL.
