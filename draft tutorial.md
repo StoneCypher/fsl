@@ -144,3 +144,26 @@ Which is suddenly more readable when written in this order:
 
 Off 'Enable' -> Red;
 ```
+
+### Making machines manageable: annotations
+
+Let's add some annotations, to make this more tractable as a piece of source: `machine_name`, `machine_version`, 
+`machine_reference`, `machine_origin`, `machine_author`, and `machine_license`.
+
+```fsl
+machine_name      : "Tutorial four-state traffic light";
+machine_version   : 1.0.0;
+machine_origin    : "https://github.com/StoneCypher/fsl/blob/master/tutorial%20machines/four%20state%20traffic%20light.fsl";
+machine_reference : "https://github.com/StoneCypher/fsl/blob/master/draft%20tutorial.md";
+
+machine_author    : "John Haugeland <stonecypher@gmail.com>";
+machine_license   : MIT;
+
+
+&Colors: [Green Yellow Red];
+
+&Colors 'Proceed' => (+1);
+&Colors 'Disable' ~> Off;
+
+Off 'Enable' -> Red;
+```
