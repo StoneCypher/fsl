@@ -315,6 +315,14 @@ Mostly because it'd be weird if there weren't.  This is legal:
 state1 -> state2 <- state3;
 ```
 
+So is this:
+
+```fsl
+state1 <- state2 -> state3;
+```
+
+Keep your shorts on. 
+
 
 
 <br/><br/>
