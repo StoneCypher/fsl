@@ -80,6 +80,8 @@ This doesn't have a lot of impact; it gets drawn differently in the visualizer, 
 easier to read, and some implementations such as [jssm](https://github.com/StoneCypher/jssm) carry more 
 statistics for the different path types, but it does not have much of a language meaning.
 
+Mostly this tells the reader "this is what the `machine` spends its time doing."
+
 ```fsl
 Green => Yellow => Red => Green;
 
