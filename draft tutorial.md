@@ -304,8 +304,10 @@ And if you're feeling froggy, you can write that
 (|-1|) <= 'Cool' States 'Heat' => (|+1|);
 ```
 
+
+
 <br/><br/>
-### Yes, there are reverse arrows: <-
+### Yes, that means that there are reverse arrows: <-
 
 Mostly because it'd be weird if there weren't.  This is legal:
 
