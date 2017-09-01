@@ -131,6 +131,11 @@ Off 'Enable' -> Red;
 [Green Yellow Red] 'Disable' ~> Off;
 ```
 
+`Forced-only paths` are analogous to the `-f` switch when formatting a drive - you want to really push and say
+"yes I know there are consequences," and make sure it can't be followed by accident.
+
+Turning a traffic light off seems like such a thing.  😂
+
 
 
 <br/><br/>
