@@ -255,7 +255,7 @@ machine_license   : MIT;
 
 &Colors: [Green Yellow Red];
 
-&Colors 'Proceed' => (+1);
+&Colors 'Proceed' => +1;
 &Colors 'Disable' ~> Off;
 
 Off 'Enable' -> Red;
