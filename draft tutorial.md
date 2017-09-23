@@ -171,9 +171,9 @@ Off 'Enable' -> Red;
 
 
 <br/><br/>
-### Using named ordered sequences to make cycles: &Foo -> (+1);
+### Using named ordered sequences to make cycles: &Foo -> +1;
 
-`Named ordered sequence`s can also be used with the `cycle` operator `(N)` to simplify how we describe loops.
+`Named ordered sequence`s can also be used with the `cycle` operator `+N` to simplify how we describe loops.
 
 Right now we describe the main loop as 
 
@@ -201,10 +201,10 @@ to
 
 ```fsl
 &Colors: [Green Yellow Red];
-&Colors 'Proceed' => (+1);
+&Colors 'Proceed' => +1;
 ```
 
-The operator `(+1)` is called the `cycle operator`, and that says "apply this transition to each `state` in the 
+The operator `+1` is called the `cycle operator`, and that says "apply this transition to each `state` in the 
 `named ordered set` in order, and make the other end `+1` steps up the list."
 
 When applied to **Green** the `cycle` gets **Yellow** as the other end, because **Yellow** is `+1` steps up the 
@@ -216,7 +216,7 @@ This means that we can now write the machine this way:
 ```fsl
 &Colors: [Green Yellow Red];
 
-&Colors 'Proceed' => (+1);
+&Colors 'Proceed' => +1;
 
 Off 'Enable' -> Red;
 &Colors 'Disable' ~> Off;
@@ -227,7 +227,7 @@ Which is suddenly more readable when written in this order:
 ```fsl
 &Colors: [Green Yellow Red];
 
-&Colors 'Proceed' => (+1);
+&Colors 'Proceed' => +1;
 &Colors 'Disable' ~> Off;
 
 Off 'Enable' -> Red;
@@ -262,6 +262,8 @@ Off 'Enable' -> Red;
 ```
 
 ### Quoted strings: "No problem"
+
+Enough traffic lights for now.  
 
 Let's have a little fun remaking a classic joke flowchart as a `FSL` machine.
 
@@ -300,7 +302,7 @@ Which renders in [jssm-viz](https://github.com/StoneCypher/jssm-viz/) or the
 <br/><br/>
 ### Probabilistics: a 50% -> b
 
-Enough traffic lights for now.  You can write a coin flip like this:
+A couple quick examples.  You can write a coin flip like this:
 
 ```fsl
 UnflippedCoin 'Flip' 50% -> Heads;
@@ -317,8 +319,6 @@ UnflippedCoin 'Flip' 50% -> [Heads Tails];
 
 <br/><br/>
 ### Two-way arrows: <->
-
-Enough traffic lights for now.  
 
 You can also write multiple directions at once.  Here's the basic four states of matter:
 
@@ -346,13 +346,13 @@ Which are sometimes clearer on multiple lines:
 <br/><br/>
 ### Stripes: (|+1|);
 
-If you prefer, you could write that with the `stripe` syntax `(|N|)`, which is a `cycle` that doesn't loop at the ends.
+If you prefer, you could write that with the `stripe` syntax `+|N`, which is a `cycle` that doesn't loop at the ends.
 
 ```fsl
 &States: [Solid Liquid Gas Plasma];
 
-States 'Heat' => (|+1|);
-States 'Cool' => (|-1|);
+States 'Heat' => +|1;
+States 'Cool' => -|1;
 ```
 
 And if you're feeling froggy, you can write that
@@ -360,7 +360,7 @@ And if you're feeling froggy, you can write that
 ```fsl
 &States: [Solid Liquid Gas Plasma];
 
-(|-1|) <= 'Cool' States 'Heat' => (|+1|);
+-|1 <= 'Cool' States 'Heat' => +|1;
 ```
 
 
@@ -422,3 +422,4 @@ UnflippedCoin { action: "Flip"; probability: 50; } -> Heads;
 ```
 
 Most of the edge attributes are not actually available as shorthands, because it's not time to invent another APL.
+
