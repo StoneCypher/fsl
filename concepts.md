@@ -7,7 +7,7 @@ However, FSMs have been around for decades, and have been extended by a wide
 range of people in a wide range of languages.  These individuals have used a
 diversity of language for similar or identical features.
 
-As such, let's start with a vocabulary.
+As such, let's start with some basic vocabulary.
 
 
 
@@ -27,12 +27,16 @@ As such, let's start with a vocabulary.
 * `transition`
     * The edges of the graph.
     * Here, there are seven edges, though one may not be obvious:
-        1. From `Red` to `Green`
-        1. From `Green` to `Yellow`
-        1. From `Yellow` to `Red`
-        1. From `Green` to `Off`
-        1. From `Yellow` to `Off`
-        1. From `Red` to `Off`
-        1. From `Off` to `Red` (this one can be hard to notice, since it's between the same two edges as #6 - it's visible on the graph as a doubled edge)
+        * Three for the colors' switching:
+            1. From `Red` to `Green`
+            1. From `Green` to `Yellow`
+            1. From `Yellow` to `Red`
+        * Three for each color turning off:
+            1. From `Green` to `Off`
+            1. From `Yellow` to `Off`
+            1. From `Red` to `Off`
+        * One for turning the light on
+            1. From `Off` to `Red` 
+                * this one can be hard to notice, since it's between the same two edges as #6 - it's visible on the graph as a doubled edge
 
 <br/><br/>
