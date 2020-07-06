@@ -9,7 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Block Closing Dependent Issue
-      uses: @autoissue/autoissuebot@v1 # Uses an action in the root directory
+      uses: autoissue/autoissuebot@v1 # Uses an action in the root directory
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
 
