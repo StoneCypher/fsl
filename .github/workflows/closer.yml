@@ -6,11 +6,10 @@ jobs:
   maybe_reopen_issue:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Block Closing Dependent Issue
-      uses: autoissue/autoissuebot@v1 # Uses an action in the root directory
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Auto Issue Bot
+        uses: autoissue/autoissuebot@v1.0.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
