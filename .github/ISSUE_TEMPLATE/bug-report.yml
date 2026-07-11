@@ -1,0 +1,68 @@
+name: Bug report
+description: Report an issue or defect in the software (feature requests go elsewhere)
+labels: ["Bug"]
+body:
+
+  - type: textarea
+    id: overview
+    attributes:
+      label: Describe the bug
+      description: Just a quick overview.  Specifics below.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: To reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. `...`
+        2. `...`
+        3. `...`
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: An explanation of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        What browser, or node?  What version?  What os?
+        Was this run through some transpiler like `babel` or `typescript`?
+        Any other stuff you want to bring up.
+    validations:
+      required: false
+
+  - type: textarea
+    id: triggering-code
+    attributes:
+      label: Triggering code
+      description: The FSL or JSON machine that triggered this, possibly as well as the triggering state.
+      render: fsl
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+    validations:
+      required: false

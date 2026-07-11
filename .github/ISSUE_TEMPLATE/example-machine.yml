@@ -1,0 +1,38 @@
+name: Example machine
+description: Contribute an example machine.  Replace the sample with your own, written in FSL.
+labels: ["Examples"]
+body:
+
+  - type: textarea
+    id: machine
+    attributes:
+      label: Your machine, in FSL
+      description: Replace this machine with your own.
+      render: fsl
+      value: |
+        machine_name     : "Example traffic light";
+        machine_author   : "John Haugeland <stonecypher@gmail.com>";
+        machine_license  : MIT;
+        machine_comment  : "Just a quick example of how these are written";
+        machine_language : en;
+        machine_version  : 1.0.0;
+        fsl_version      : 1.0.0;
+
+        start_states     : [Off Red];
+
+
+
+        Off 'Enable' -> Red;
+
+        Red 'Proceed' => Green 'Proceed' => Yellow 'Proceed' => Red;
+
+        [Red Yellow Green] ~> Off;
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything you'd like to say about it
+    validations:
+      required: false
